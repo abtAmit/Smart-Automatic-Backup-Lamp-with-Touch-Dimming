@@ -2,3 +2,7 @@
 A smart Lamp which will automatically turned on in power outage.
 # Features
 <ol><li data-list="bullet"><strong>Intelligent Automation:</strong> The LDR constantly monitors the room's light levels. It only kicks on when the environment is actually dark.</li><li data-list="bullet"><strong>Touch Dimming:</strong> The TTP223 sensor is more than just an on/off switch. By long-pressing the sensor, you can adjust the brightness via PWM, allowing you to save battery or set a mood.</li><li data-list="bullet"><strong>Soft-Off (Grace Period):</strong> Sensitive touch sensors often cause accidental blackouts. To prevent this, when you tap to turn the lamp off, it blinks and waits 5 seconds before cutting the power. If you touch the sensor again during this countdown, the shutdown is canceled!</li></ol>
+
+For more info visit : https://www.instructables.com/Smart-Automatic-Backup-Lamp-With-Touch-Dimming/
+                                             <p> or </p>
+      https://www.electronicwings.com/users/Amit/projects/6025/smart-automatic-backup-lamp-with-touch-dimming
