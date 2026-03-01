@@ -4,7 +4,7 @@
 #define ldr A1
 #define led 11
 #define touch 6
-#define doubleTapGap 500  //200ms
+#define blinkInterval 200  //200ms
 #define off 0
 #define on 1
 #define offWarning 5000
@@ -34,15 +34,16 @@ int avg() {
   return r;
 }
 void turnOff() {
-  
+ bool blinkState=1;
   Serial.println("turning off");
-  for (int i = 0; i < 5; i++) {
+ /* for (int i = 0; i < 5; i++) {
     digitalWrite(led, off);
     delay(100);
     digitalWrite(led, on);
     delay(200);
   }
-  digitalWrite(led, on);
+  digitalWrite(led, on);*/
+unsigned long lastBlink, currentBlinkTime;
   pre = millis();
   while ( (millis()-pre) < offWarning) {
 
@@ -50,6 +51,13 @@ void turnOff() {
       ison = true;
       Serial.println("Turned on");
       return;
+    }
+    currentBlinkTime=millis();
+    if (currentBlinkTime-lastBlink>blinkInterval){
+      blinkState=!blinkState;
+     analogWrite(led, max(0, value - (50 * blinkState))); // value will be 50 less if blinkState is 1
+      lastBlink=currentBlinkTime;
+    
     }
   }
   digitalWrite(led,0);
