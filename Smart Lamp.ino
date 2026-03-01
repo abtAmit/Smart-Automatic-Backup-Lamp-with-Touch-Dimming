@@ -13,6 +13,7 @@ bool ison = 1,ledon=1;
 int value = 255;
 uint8_t tapCounter = 0;
 int current_reference = 0, timeEscaped = 0;
+int8_t sign = -1;
 
 unsigned long pre, pressedat, lasttimepressed, curr, pressedfor;
 void setup() {
@@ -91,7 +92,6 @@ void lamp() {
 }
 
 
-int8_t sign = -1;
 void loop() {
   pressedfor = 0;
 
@@ -100,6 +100,7 @@ Serial.println(ison);
   if (ison == true) {
     lamp();
     curr = millis();
+   // ------------touch logic--------------------------
     while (digitalRead(touch) == 1 && pressedfor <= 777) {  // exist the loop after 1 second
       pressedat = millis();
       pressedfor = millis() - curr;
@@ -109,7 +110,7 @@ Serial.println(ison);
       turnOff();
     }
 
-    while (digitalRead(touch) == 1 && pressedfor > 776) {  //tapcounter indicate no. of short tapped
+    while (digitalRead(touch) == 1 && pressedfor > 776) {  //dimming logic and reference 
 
       if (sign == -1) {
         sign = 1;
@@ -132,6 +133,10 @@ Serial.println(ison);
           }
         }
       }
+      delay(500);
+      current_reference = avg();
+      Serial.println("Reference updated after dimming");
+
     }
 
 
